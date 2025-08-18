@@ -1,0 +1,31 @@
+//
+//  MCComponentGroup.swift
+//  MCFunctionDSL
+//
+//  Created by Kenna Blackburn on 8/17/25.
+//
+
+import Foundation
+
+struct _MCComponentGroup: MCComponent {
+    let children: [any MCComponent]
+    
+    init(children: [any MCComponent]) {
+        self.children = children
+    }
+    
+    var body: Never { fatalError() }
+    
+    func compileLines() -> [String] {
+        return children
+            .flatMap({ $0.compileLines() })
+    }
+}
+
+extension _MCComponentGroup {
+    static var empty: Self { .init(children: []) }
+    
+    init(_ children: (any MCComponent)...) {
+        self.init(children: children)
+    }
+}
