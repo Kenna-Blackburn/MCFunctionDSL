@@ -8,7 +8,7 @@
 import Foundation
 
 struct _ArgumentGroup: Argument {
-    var children: [(any Argument)?]
+    let children: [(any Argument)?]
     
     init(children: [(any Argument)?]) {
         self.children = children
@@ -48,7 +48,12 @@ struct _ArgumentGroup: Argument {
 extension _ArgumentGroup {
     static var empty: Self { .init(children: []) }
     
-    init(_ children: (any Argument)?...) {
+    init(
+        _ children: (any Argument)?...,
+        prepare: (inout [(any Argument)?]) -> Void = { _ in }
+    ) {
+        var children = children
+        prepare(&children)
         self.init(children: children)
     }
 }

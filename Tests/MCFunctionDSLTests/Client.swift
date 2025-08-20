@@ -59,17 +59,24 @@ func client() async throws {
             }
         }
         
-        Section("Spirit") {
-            // setup
-            let spawnedAllay = TargetSelector.allEntities(.typed("allay"), .named("Speed Spirit")) // EntityType: ExpressibleByStringLiteral
-            Execute(.at(spawnedAllay), .run(Summon(.armorStand, named: "Speed Spirit"))) // Summon(/*...*/).execute(.at(spawnSelector))
-            Kill(spawnedAllay)
-            
-            // upkeep
-            let spirit = TargetSelector.allEntities(.typed(.armorStand), .named("Speed Spirit"))
-            Effect.give(spirit, .invisibility(1, for: 1))
-            Teleport(spirit, .forward(0.2), facing: .nearestPlayer(.outside(radius: 5), .within(radius: 30)))
-            Execute(.at(spirit), .run(Effect.give(.allPlayers(.within(radius: 10)), .speed(3, for: 1))))
+//        Section("Spirit") {
+//            // setup
+//            let spawnedAllay = TargetSelector.allEntities(.typed("allay"), .named("Speed Spirit")) // EntityType: ExpressibleByStringLiteral
+//            Execute(At(spawnedAllay), Run(Summon(.armorStand, named: "Speed Spirit"))) // Summon(/*...*/).execute(.at(spawnSelector))
+//            Kill(spawnedAllay)
+//            
+//            // upkeep
+//            let spirit = TargetSelector.allEntities(.typed(.armorStand), .named("Speed Spirit"))
+//            Effect.give(spirit, .invisibility(1, for: 1))
+//            Teleport(spirit, .forward(0.2), facing: .nearestPlayer(.outside(radius: 5), .within(radius: 30)))
+//            Execute(.at(spirit), .run(Effect.give(.allPlayers(.within(radius: 10)), .speed(3, for: 1))))
+//        }
+        
+        Section("Execute (also testing hell)") {
+            Execute(As(.allPlayers), run: {
+                Command("say 1")
+                Command("say 2")
+            })
         }
     }
     

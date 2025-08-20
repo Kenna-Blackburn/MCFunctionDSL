@@ -8,6 +8,8 @@
 import Foundation
 
 struct Section<Content: MCComponent>: MCComponent {
+    var isExecutable: Bool = false
+    
     let header: String
     let level: Int
     let content: () -> Content
@@ -23,9 +25,9 @@ struct Section<Content: MCComponent>: MCComponent {
     }
     
     var body: some MCComponent {
-        Break()
+        LineBreak()
         Comment(header, level: level)
         content().indenting(by: level)
-        Break()
+        LineBreak()
     }
 }

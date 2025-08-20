@@ -8,6 +8,8 @@
 import Foundation
 
 struct Comment: MCComponent {
+    var isExecutable: Bool = false
+    
     let content: String
     let level: Int
     

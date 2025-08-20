@@ -21,20 +21,21 @@ struct TargetSelector: Argument {
     
     
     func compileArgument() -> String {
-        var argumentGroup = _ArgumentGroup()
-        if arguments.isEmpty {
-            argumentGroup.children.append(variable)
-        } else {
-            argumentGroup.children.append(_Unpadding(variable))
-            argumentGroup.children.append(_Unpadding("["))
-            argumentGroup.children.append(
-                _Unpadding(
-                    arguments
-                        .map({ $0.compileArgument() })
-                        .joined(separator: ",")
+        let argumentGroup = _ArgumentGroup { group in
+            if arguments.isEmpty {
+                group.append(variable)
+            } else {
+                group.append(_Unpadding(variable))
+                group.append(_Unpadding("["))
+                group.append(
+                    _Unpadding(
+                        arguments
+                            .map({ $0.compileArgument() })
+                            .joined(separator: ",")
+                    )
                 )
-            )
-            argumentGroup.children.append(_Unpadding("]"))
+                group.append(_Unpadding("]"))
+            }
         }
         
         return argumentGroup.compileArgument()

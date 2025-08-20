@@ -8,10 +8,9 @@
 import Foundation
 
 struct LineBreak: MCComponent {
+    var isExecutable: Bool = false
+    
     var body: some MCComponent {
         Command(children: [])
     }
 }
-
-typealias NewLine = LineBreak
-typealias Break = LineBreak

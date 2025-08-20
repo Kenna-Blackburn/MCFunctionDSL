@@ -8,7 +8,7 @@
 import Foundation
 
 struct _MCComponentGroup: MCComponent {
-    let children: [any MCComponent]
+    var children: [any MCComponent]
     
     init(children: [any MCComponent]) {
         self.children = children
@@ -25,7 +25,12 @@ struct _MCComponentGroup: MCComponent {
 extension _MCComponentGroup {
     static var empty: Self { .init(children: []) }
     
-    init(_ children: (any MCComponent)...) {
+    init(
+        _ children: (any MCComponent)...,
+        prepare: (inout [any MCComponent]) -> Void = { _ in }
+    ) {
+        var children = children
+        prepare(&children)
         self.init(children: children)
     }
 }

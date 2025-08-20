@@ -10,7 +10,7 @@ import Foundation
 struct _AnyArgument: Argument {
     var padding: Padding
     
-    var _compileArgument: () -> String
+    let _compileArgument: () -> String
     
     func compileArgument() -> String { return _compileArgument() }
     

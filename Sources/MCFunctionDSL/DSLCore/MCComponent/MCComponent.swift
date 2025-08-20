@@ -10,6 +10,8 @@ import Foundation
 protocol MCComponent {
     associatedtype Body: MCComponent
     
+    var isExecutable: Bool { get }
+    
     @MCComponentBuilder
     var body: Body { get }
     
@@ -17,6 +19,8 @@ protocol MCComponent {
 }
 
 extension MCComponent {
+    var isExecutable: Bool { true }
+    
     func compileLines() -> [String] {
         return body.compileLines()
     }
