@@ -8,13 +8,21 @@
 import Foundation
 
 extension TargetSelector {
-    enum SelectorVariable: Argument {
+    enum SelectorVariable: Argument, CaseIterable {
         case nearestPlayer
         case random
         case allPlayers
         case allEntities
         case executor
         case player(String)
+        
+        static let allCases: [Self] = [
+            .nearestPlayer,
+            .random,
+            .allPlayers,
+            .allEntities,
+            .executor,
+        ]
         
         func compileArgument() -> String {
             switch self {

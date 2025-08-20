@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Kill.swift
 //  MCFunctionDSL
 //
 //  Created by Kenna Blackburn on 8/18/25.

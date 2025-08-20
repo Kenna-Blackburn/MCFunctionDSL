@@ -8,23 +8,13 @@
 import Foundation
 
 protocol Argument {
+    typealias Padding = (leading: Bool, trailing: Bool)
+    
+    var padding: Padding { get }
+    
     func compileArgument() -> String
 }
 
-extension String: Argument {
-    func compileArgument() -> String {
-        return self
-    }
-}
-
-extension Int: Argument {
-    func compileArgument() -> String {
-        return String(format: "%g", self)
-    }
-}
-
-extension Double: Argument {
-    func compileArgument() -> String {
-        return String(format: "%g", self)
-    }
+extension Argument {
+    var padding: Padding { (true, true) }
 }

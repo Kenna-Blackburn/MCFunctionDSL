@@ -24,6 +24,20 @@ func client() async throws {
             Kill(.allEntities(.named("remove_me"), ._not(.named("do_not_remove"))))
                 .commenting("`.notNamed(_:)` coming soon")
         }
+        
+        Section("Argument Testing Hell") {
+            _ArgumentGroup("1", _Unpadding("2"), "3")
+            _ArgumentGroup("1", _Unpadding("2"), _Unpadding("3"), "4")
+            
+            _ArgumentGroup("+1").indenting(by: 1)
+            _ArgumentGroup("+2").indenting(by: 2)
+            _ArgumentGroup("+3").indenting(by: 3)
+        }
+        
+        Section("Effect") {
+            Effect.give(.allEntities(.named("hide")), .invisibility(1, for: 1), hideParticles: true)
+            Effect.clear(.allEntities(.named("show")))
+        }
     }
     
     print(build().compileContents())

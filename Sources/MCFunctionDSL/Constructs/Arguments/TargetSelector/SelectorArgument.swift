@@ -24,12 +24,15 @@ extension TargetSelector {
         }
         
         func compileArgument() -> String {
-            return .init { string in
-                string.append(argument)
-                string.append("=")
-                if invert { string.append("!") }
-                string.append(value.compileArgument())
-            }
+            let argumentGroup = _ArgumentGroup(
+                argument,
+                "=",
+                invert ? "!" : nil,
+                value
+            )
+            
+            let unpaddedArgumentGroup = argumentGroup.unpadded()
+            return unpaddedArgumentGroup.compileArgument()
         }
     }
 }

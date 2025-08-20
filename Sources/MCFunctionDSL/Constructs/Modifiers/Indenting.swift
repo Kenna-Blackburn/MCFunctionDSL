@@ -10,7 +10,7 @@ import Foundation
 extension MCComponent {
     func indenting(
         by level: Int = 1,
-        with indent: String = " "
+        with indent: String = _Padding().compileArgument()
     ) -> some MCComponent {
         let children = self
             .compileLines()
