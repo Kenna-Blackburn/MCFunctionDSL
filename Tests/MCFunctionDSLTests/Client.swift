@@ -26,14 +26,14 @@ func client() async throws {
         }
         
         Section("Argument Testing Hell") {
-            _ArgumentGroup("1", _Unpadding("2"), "3")
-            _ArgumentGroup("1", _Unpadding("2"), _Unpadding("3"), "4")
+            ArgumentGroup("1", _Unpadding("2"), "3")
+            ArgumentGroup("1", _Unpadding("2"), _Unpadding("3"), "4")
             
             LineBreak()
             
-            _ArgumentGroup("+1").indenting(by: 1)
-            _ArgumentGroup("+2").indenting(by: 2)
-            _ArgumentGroup("+3").indenting(by: 3)
+            ArgumentGroup("+1").indenting(by: 1)
+            ArgumentGroup("+2").indenting(by: 2)
+            ArgumentGroup("+3").indenting(by: 3)
         }
         
         Section("Effect") {
@@ -59,22 +59,23 @@ func client() async throws {
             }
         }
         
-//        Section("Spirit") {
-//            // setup
-//            let spawnedAllay = TargetSelector.allEntities(.typed("allay"), .named("Speed Spirit")) // EntityType: ExpressibleByStringLiteral
-//            Execute(At(spawnedAllay), Run(Summon(.armorStand, named: "Speed Spirit"))) // Summon(/*...*/).execute(.at(spawnSelector))
-//            Kill(spawnedAllay)
-//            
-//            // upkeep
-//            let spirit = TargetSelector.allEntities(.typed(.armorStand), .named("Speed Spirit"))
-//            Effect.give(spirit, .invisibility(1, for: 1))
+        Section("Spirit") {
+            // setup
+            let spawnedAllay = TargetSelector.allEntities(.typed("allay"), .named("Speed Spirit")) // EntityType: ExpressibleByStringLiteral
+//            Execute(At(spawnedAllay), run: { Summon(.armorStand, named: "Speed Spirit") }) // Summon(/*...*/).execute(At(spawnAllay))
+            Kill(spawnedAllay)
+            
+            // upkeep
+            let spirit = TargetSelector.allEntities(.typed(.armorStand), .named("Speed Spirit"))
+            Effect.give(spirit, .invisibility(1, for: 1))
 //            Teleport(spirit, .forward(0.2), facing: .nearestPlayer(.outside(radius: 5), .within(radius: 30)))
-//            Execute(.at(spirit), .run(Effect.give(.allPlayers(.within(radius: 10)), .speed(3, for: 1))))
-//        }
+            Execute(At(spirit), run: { Effect.give(.allPlayers(.within(radius: 10)), .speed(3, for: 1)) })
+        }
         
         Section("Execute (also testing hell)") {
             Execute(As(.allPlayers), run: {
                 Command("say 1")
+                Comment("hello")
                 Command("say 2")
             })
         }

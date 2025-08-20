@@ -15,6 +15,18 @@ struct As: ExecuteSubcommand {
     }
     
     func compileArgument() -> String {
-        return _ArgumentGroup("as", target).compileArgument()
+        return ArgumentGroup("as", target).compileArgument()
+    }
+}
+
+struct At: ExecuteSubcommand {
+    let target: TargetSelector
+    
+    init(_ target: TargetSelector) {
+        self.target = target
+    }
+    
+    func compileArgument() -> String {
+        return ArgumentGroup("at", target).compileArgument()
     }
 }

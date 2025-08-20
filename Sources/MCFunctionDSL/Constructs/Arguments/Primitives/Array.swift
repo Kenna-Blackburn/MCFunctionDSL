@@ -9,6 +9,6 @@ import Foundation
 
 extension Array: Argument where Element: Argument {
     func compileArgument() -> String {
-        return _ArgumentGroup(children: self).compileArgument()
+        return ArgumentGroup(children: self).compileArgument()
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct _ArgumentGroup: Argument {
+struct ArgumentGroup: Argument {
     let children: [(any Argument)?]
     
     init(children: [(any Argument)?]) {
@@ -45,7 +45,7 @@ struct _ArgumentGroup: Argument {
     }
 }
 
-extension _ArgumentGroup {
+extension ArgumentGroup {
     static var empty: Self { .init(children: []) }
     
     init(

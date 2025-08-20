@@ -10,8 +10,6 @@ import Foundation
 protocol MCComponent {
     associatedtype Body: MCComponent
     
-    var isExecutable: Bool { get }
-    
     @MCComponentBuilder
     var body: Body { get }
     

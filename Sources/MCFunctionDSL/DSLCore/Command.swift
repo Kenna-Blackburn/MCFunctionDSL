@@ -7,11 +7,20 @@
 
 import Foundation
 
-typealias Command = _ArgumentGroup
+typealias Command = ArgumentGroup
 extension Command: MCComponent {
     var body: Never { fatalError() }
     
     func compileLines() -> [String] {
         return [compileArgument()]
+    }
+}
+
+extension Command {
+    var isExecutable: Bool {
+        return self
+            .compileArgument()
+            .matches(of: /\s*#+/)
+            .isEmpty
     }
 }

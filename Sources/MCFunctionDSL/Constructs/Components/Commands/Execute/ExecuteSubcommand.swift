@@ -8,8 +8,3 @@
 import Foundation
 
 protocol ExecuteSubcommand: Argument {}
-extension ExecuteSubcommand {
-    static func `as`(_ target: TargetSelector) -> As {
-        return .init(target)
-    }
-}

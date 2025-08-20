@@ -27,6 +27,7 @@ struct Execute<Run: MCComponent>: MCComponent {
             
             supergroup = runCommand()
                 .compileLines()
+                .filter({ $0.matches(of: /\s*#+/).isEmpty })
                 .map({ Command(baseCommand, $0) })
         }
     }

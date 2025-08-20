@@ -33,16 +33,3 @@ struct _Unpadding: Argument {
         return anyArgument.compileArgument()
     }
 }
-
-extension _ArgumentGroup {
-    func unpadded() -> _ArgumentGroup {
-        let newChildren = self
-            .children
-            .map { child in
-                guard let child else { return _Unpadding?.none }
-                return _Unpadding(child)
-            }
-        
-        return _ArgumentGroup(children: newChildren)
-    }
-}

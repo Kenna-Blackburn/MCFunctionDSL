@@ -24,14 +24,14 @@ extension TargetSelector {
         }
         
         func compileArgument() -> String {
-            let argumentGroup = _ArgumentGroup(
+            let argumentGroup = ArgumentGroup(
                 argument,
                 "=",
                 invert ? "!" : nil,
                 value
             )
             
-            let unpaddedArgumentGroup = argumentGroup.unpadded()
+            let unpaddedArgumentGroup = argumentGroup.unpaddingChildren()
             return unpaddedArgumentGroup.compileArgument()
         }
     }
@@ -62,5 +62,15 @@ extension TargetSelector.SelectorArgument {
             value: type,
             invert: invert
         )
+    }
+}
+
+extension TargetSelector.SelectorArgument {
+    static func within(radius: UInt) -> Self {
+        return .init("r", value: radius)
+    }
+    
+    static func outside(radius: UInt) -> Self {
+        return .init("rm", value: radius)
     }
 }

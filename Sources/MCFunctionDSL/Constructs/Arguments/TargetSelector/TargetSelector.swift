@@ -21,7 +21,7 @@ struct TargetSelector: Argument {
     
     
     func compileArgument() -> String {
-        let argumentGroup = _ArgumentGroup { group in
+        let argumentGroup = ArgumentGroup { group in
             if arguments.isEmpty {
                 group.append(variable)
             } else {
