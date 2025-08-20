@@ -11,9 +11,14 @@ extension MCComponent {
     @MCComponentBuilder
     func commenting(
         _ content: String,
-        level: Int = 1
+        level: Int = 1,
+        padding: (leading: Bool, trailing: Bool) = (false, false)
     ) -> some MCComponent {
+        LineBreak().if(padding.leading)
+        
         Comment(content, level: level)
         self
+        
+        LineBreak().if(padding.trailing)
     }
 }

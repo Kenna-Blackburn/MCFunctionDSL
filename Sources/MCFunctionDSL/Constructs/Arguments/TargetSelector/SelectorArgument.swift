@@ -55,4 +55,12 @@ extension TargetSelector.SelectorArgument {
             invert: invert
         )
     }
+    
+    static func typed(_ type: EntityType, invert: Bool = false) -> Self {
+        return .init(
+            "type",
+            value: type,
+            invert: invert
+        )
+    }
 }

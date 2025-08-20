@@ -35,14 +35,14 @@ enum Effect: MCComponent {
 
 extension Effect {
     struct Effect {
-        var effectID: String
-        var strength: UInt8
-        var duration: Self.Duration
+        let effectID: String
+        let strength: UInt8
+        let duration: Self.Duration
         
         init(
             _ effectID: String,
-            strength: UInt8,
-            duration: Self.Duration
+            _ strength: UInt8,
+            for duration: Self.Duration
         ) {
             self.effectID = effectID
             self.strength = strength
@@ -76,43 +76,27 @@ extension Effect.Effect {
         _ strength: UInt8,
         for duration: Effect.Effect.Duration
     ) -> Self {
-        return .init(
-            "invisibility",
-            strength: strength,
-            duration: duration
-        )
+        return .init("invisibility", strength, for: duration)
     }
     
     static func levitation(
         _ strength: UInt8,
         for duration: Effect.Effect.Duration
     ) -> Self {
-        return .init(
-            "levitation",
-            strength: strength,
-            duration: duration
-        )
+        return .init("levitation", strength, for: duration)
     }
     
     static func speed(
         _ strength: UInt8,
         for duration: Effect.Effect.Duration
     ) -> Self {
-        return .init(
-            "speed",
-            strength: strength,
-            duration: duration
-        )
+        return .init("speed", strength, for: duration)
     }
     
     static func jumpBoost(
         _ strength: UInt8,
         for duration: Effect.Effect.Duration
     ) -> Self {
-        return .init(
-            "jump_boost",
-            strength: strength,
-            duration: duration
-        )
+        return .init("jump_boost", strength, for: duration)
     }
 }
