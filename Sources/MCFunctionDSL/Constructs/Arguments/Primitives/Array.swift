@@ -8,7 +8,7 @@
 import Foundation
 
 extension Array: Argument where Element: Argument {
-    func compileArgument() -> String {
-        return ArgumentGroup(children: self).compileArgument()
+    var argumentBody: some Argument {
+        ArgumentGroup(children: self)
     }
 }

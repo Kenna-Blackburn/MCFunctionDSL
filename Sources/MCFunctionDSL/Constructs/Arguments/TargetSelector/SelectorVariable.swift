@@ -24,20 +24,20 @@ extension TargetSelector {
             .executor,
         ]
         
-        func compileArgument() -> String {
+        var argumentBody: some Argument {
             switch self {
             case .nearestPlayer:
-                return "@p"
+                "@p"
             case .random:
-                return "@r"
+                "@r"
             case .allPlayers:
-                return "@a"
+                "@a"
             case .allEntities:
-                return "@e"
+                "@e"
             case .executor:
-                return "@s"
+                "@s"
             case .player(let name):
-                return name
+                name
             }
         }
     }

@@ -14,8 +14,8 @@ struct EntityTag: Argument {
         self.tagString = tagString
     }
     
-    func compileArgument() -> String {
-        return tagString
+    var argumentBody: some Argument {
+        tagString
     }
 }
 

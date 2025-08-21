@@ -11,14 +11,13 @@ enum WorldPosition: Argument {
     case world(Double)
     case relative(Double?)
     
-    func compileArgument() -> String {
+    var argumentBody: some Argument {
         switch self {
         case .world(let double):
-            return double.compileArgument()
+            ArgumentGroup(double)
         case .relative(let double):
-            return ArgumentGroup("~", double)
+            ArgumentGroup("~", double)
                 .unpaddingChildren()
-                .compileArgument()
         }
     }
 }

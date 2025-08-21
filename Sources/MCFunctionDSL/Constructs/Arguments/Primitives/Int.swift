@@ -8,19 +8,19 @@
 import Foundation
 
 extension Int: Argument {
-    func compileArgument() -> String {
-        return String(self)
+    var argumentBody: some Argument {
+        String(self)
     }
 }
 
 extension UInt: Argument {
-    func compileArgument() -> String {
-        return String(self)
+    var argumentBody: some Argument {
+        String(self)
     }
 }
 
 extension UInt8: Argument {
-    func compileArgument() -> String {
-        return String(self)
+    var argumentBody: some Argument {
+        String(self)
     }
 }

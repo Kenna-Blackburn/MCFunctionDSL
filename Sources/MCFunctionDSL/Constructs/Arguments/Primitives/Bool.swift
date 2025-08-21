@@ -8,12 +8,7 @@
 import Foundation
 
 extension Bool: Argument {
-    func compileArgument() -> String {
-        switch self {
-        case true:
-            return "true"
-        case false:
-            return "false"
-        }
+    var argumentBody: some Argument {
+        self.description
     }
 }

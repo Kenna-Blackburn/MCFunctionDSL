@@ -14,7 +14,7 @@ struct Kill: MCComponent {
         self.target = target
     }
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         Command("kill", target)
     }
 }

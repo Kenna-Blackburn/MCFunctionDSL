@@ -12,14 +12,14 @@ enum Facing: Argument {
     case position(Position)
     case target(TargetSelector)
     
-    func compileArgument() -> String {
+    var argumentBody: some Argument {
         switch self {
         case .rotation(let rotation):
-            return rotation.compileArgument()
+            ArgumentGroup(rotation)
         case .position(let position):
-            return ArgumentGroup("facing", position).compileArgument()
+            ArgumentGroup("facing", position)
         case .target(let target):
-            return ArgumentGroup("facing", target).compileArgument()
+            ArgumentGroup("facing", target)
         }
     }
 }

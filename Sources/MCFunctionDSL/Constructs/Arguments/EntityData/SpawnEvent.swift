@@ -14,8 +14,8 @@ struct SpawnEvent: Argument {
         self.eventString = eventString
     }
     
-    func compileArgument() -> String {
-        return eventString
+    var argumentBody: some Argument {
+        eventString
     }
 }
 

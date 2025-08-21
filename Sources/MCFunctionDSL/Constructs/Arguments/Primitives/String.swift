@@ -8,6 +8,8 @@
 import Foundation
 
 extension String: Argument {
+    var argumentBody: Never { fatalError() }
+    
     func compileArgument() -> String {
         return self
     }

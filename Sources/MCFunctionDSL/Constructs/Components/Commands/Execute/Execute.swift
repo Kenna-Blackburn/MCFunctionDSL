@@ -19,7 +19,7 @@ struct Execute<Run: MCComponent>: MCComponent {
         self.runCommand = runCommand
     }
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         _MCComponentGroup { supergroup in
             let baseCommand = Command("execute") { command in
                 subcommands.forEach({ command.append($0) })

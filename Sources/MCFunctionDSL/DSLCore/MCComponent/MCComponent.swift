@@ -8,10 +8,10 @@
 import Foundation
 
 protocol MCComponent {
-    associatedtype Body: MCComponent
+    associatedtype ComponentBody: MCComponent
     
     @MCComponentBuilder
-    var body: Body { get }
+    var componentBody: ComponentBody { get }
     
     func compileLines() -> [String]
 }
@@ -20,10 +20,11 @@ extension MCComponent {
     var isExecutable: Bool { true }
     
     func compileLines() -> [String] {
-        return body.compileLines()
+        return componentBody.compileLines()
     }
 }
 
 extension Never: MCComponent {
-    var body: Never { fatalError() }
+    var componentBody: Never { fatalError() }
+    func compileLines() -> [String] { fatalError() }
 }

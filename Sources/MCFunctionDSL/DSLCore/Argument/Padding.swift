@@ -12,21 +12,19 @@ struct _Padding: Argument {
     
     let padding: Padding = (false, false)
     
-    func compileArgument() -> String { return " " }
+    var argumentBody: some Argument { " " }
 }
 
+// TODO: replace fully with .unpadding*
 struct _Unpadding: Argument, MCComponent {
     let argument: any Argument
+    let padding: Padding = (false, false)
     
     init(_ argument: any Argument) {
         self.argument = argument
     }
     
-    let padding: Padding = (false, false)
-    
-    var body: some MCComponent {
-        Command(compileArgument())
-    }
+    var argumentBody: Never { fatalError() }
     
     func compileArgument() -> String {
         let anyArgument = _AnyArgument(
@@ -35,5 +33,9 @@ struct _Unpadding: Argument, MCComponent {
         )
         
         return anyArgument.compileArgument()
+    }
+    
+    var componentBody: some MCComponent {
+        Command(compileArgument())
     }
 }

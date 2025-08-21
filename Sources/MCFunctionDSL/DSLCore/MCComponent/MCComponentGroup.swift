@@ -14,7 +14,7 @@ struct _MCComponentGroup: MCComponent {
         self.children = children
     }
     
-    var body: Never { fatalError() }
+    var componentBody: Never { fatalError() }
     
     func compileLines() -> [String] {
         return children

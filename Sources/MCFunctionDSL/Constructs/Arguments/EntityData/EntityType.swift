@@ -19,8 +19,9 @@ struct EntityType: Argument {
         self.namespace = namespace
     }
     
-    func compileArgument() -> String {
-        return "\(namespace):\(typeID)"
+    var argumentBody: some Argument {
+        ArgumentGroup(namespace, ":", typeID)
+            .unpaddingChildren()
     }
 }
 

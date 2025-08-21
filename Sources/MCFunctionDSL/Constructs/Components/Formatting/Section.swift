@@ -24,7 +24,7 @@ struct Section<Content: MCComponent>: MCComponent {
         self.content = content
     }
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         LineBreak()
         Comment(header, level: level)
         content().indenting(by: level)

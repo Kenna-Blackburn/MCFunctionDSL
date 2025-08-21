@@ -16,7 +16,7 @@ struct Rotation: Argument {
         self.yaw = yaw
     }
     
-    func compileArgument() -> String {
-        return ArgumentGroup(pitch, yaw).compileArgument()
+    var argumentBody: some Argument {
+        ArgumentGroup(pitch, yaw)
     }
 }

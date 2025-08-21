@@ -14,6 +14,8 @@ struct ArgumentGroup: Argument {
         self.children = children
     }
     
+    var argumentBody: Never { fatalError() }
+    
     func compileArgument() -> String {
         let compactedChildren = children
             .compactMap({ $0 })

@@ -10,7 +10,7 @@ import Foundation
 struct LineBreak: MCComponent {
     var isExecutable: Bool = false
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         Command(children: [])
     }
 }

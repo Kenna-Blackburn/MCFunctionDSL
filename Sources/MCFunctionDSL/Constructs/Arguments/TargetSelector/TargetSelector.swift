@@ -20,25 +20,20 @@ struct TargetSelector: Argument {
     }
     
     
-    func compileArgument() -> String {
-        let argumentGroup = ArgumentGroup { group in
-            if arguments.isEmpty {
-                group.append(variable)
-            } else {
-                group.append(_Unpadding(variable))
-                group.append(_Unpadding("["))
-                group.append(
-                    _Unpadding(
-                        arguments
-                            .map({ $0.compileArgument() })
-                            .joined(separator: ",")
-                    )
-                )
-                group.append(_Unpadding("]"))
-            }
+    var argumentBody: some Argument {
+        if arguments.isEmpty {
+            ArgumentGroup(variable)
+        } else {
+            ArgumentGroup(
+                variable,
+                "[",
+                arguments
+                    .map({ $0.compileArgument() })
+                    .joined(separator: ","),
+                "]"
+            )
+            .unpaddingChildren()
         }
-        
-        return argumentGroup.compileArgument()
     }
 }
 

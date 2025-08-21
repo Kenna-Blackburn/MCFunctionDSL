@@ -21,7 +21,7 @@ struct Comment: MCComponent {
         self.level = level
     }
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         Command(String(repeating: "#", count: level), content)
     }
 }

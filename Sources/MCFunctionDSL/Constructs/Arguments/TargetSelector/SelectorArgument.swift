@@ -23,16 +23,14 @@ extension TargetSelector {
             self.invert = invert
         }
         
-        func compileArgument() -> String {
-            let argumentGroup = ArgumentGroup(
+        var argumentBody: some Argument {
+            ArgumentGroup(
                 argument,
                 "=",
                 invert ? "!" : nil,
                 value
             )
-            
-            let unpaddedArgumentGroup = argumentGroup.unpaddingChildren()
-            return unpaddedArgumentGroup.compileArgument()
+            .unpaddingChildren()
         }
     }
 }

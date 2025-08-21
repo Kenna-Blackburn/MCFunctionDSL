@@ -14,8 +14,8 @@ struct As: ExecuteSubcommand {
         self.target = target
     }
     
-    func compileArgument() -> String {
-        return ArgumentGroup("as", target).compileArgument()
+    var argumentBody: some Argument {
+        ArgumentGroup("as", target)
     }
 }
 
@@ -26,7 +26,7 @@ struct At: ExecuteSubcommand {
         self.target = target
     }
     
-    func compileArgument() -> String {
-        return ArgumentGroup("at", target).compileArgument()
+    var argumentBody: some Argument {
+        ArgumentGroup("at", target)
     }
 }

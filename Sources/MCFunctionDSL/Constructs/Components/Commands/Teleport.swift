@@ -25,7 +25,7 @@ struct Teleport: MCComponent {
         self.checkForBlocks = checkForBlocks
     }
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         Command(
             "tp",
             target,
@@ -55,12 +55,12 @@ extension Teleport {
         case position(Position)
         case target(TargetSelector)
         
-        func compileArgument() -> String {
+        var argumentBody: some Argument {
             switch self {
             case .position(let position):
-                return position.compileArgument()
+                ArgumentGroup(position)
             case .target(let target):
-                return target.compileArgument()
+                ArgumentGroup(target)
             }
         }
     }

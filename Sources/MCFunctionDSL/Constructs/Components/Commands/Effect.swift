@@ -11,7 +11,7 @@ enum Effect: MCComponent {
     case _give(target: TargetSelector, effect: Self.Effect, hideParticles: Bool?)
     case _clear(target: TargetSelector)
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         switch self {
         case ._give(let target, let effect, let hideParticles):
             Command(
@@ -71,12 +71,12 @@ extension Effect.Effect {
         case duration(Int)
         case infinite
         
-        func compileArgument() -> String {
+        var argumentBody: some Argument {
             switch self {
             case .duration(let duration):
-                return duration.compileArgument()
+                ArgumentGroup(duration)
             case .infinite:
-                return "infinite"
+                ArgumentGroup("infinite")
             }
         }
     }

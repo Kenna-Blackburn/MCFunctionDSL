@@ -25,7 +25,7 @@ struct Summon: MCComponent {
         self.spawnEvent = spawnEvent
     }
     
-    var body: some MCComponent {
+    var componentBody: some MCComponent {
         Command(
             "summon",
             entityType,

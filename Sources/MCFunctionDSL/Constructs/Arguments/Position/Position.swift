@@ -17,17 +17,16 @@ enum Position: Argument {
     case _worldPosition(x: WorldPosition, y: WorldPosition, z: WorldPosition)
     case _relativeToRotation(x: Double?, y: Double?, z: Double?)
     
-    func compileArgument() -> String {
+    var argumentBody: some Argument {
         switch self {
         case ._worldPosition(let x, let y, let z):
-            return ArgumentGroup(x, y, z).compileArgument()
+            ArgumentGroup(x, y, z)
         case ._relativeToRotation(let x, let y, let z):
-            return ArgumentGroup { group in
+            ArgumentGroup { group in
                 group.append(ArgumentGroup("^", x).unpaddingChildren())
                 group.append(ArgumentGroup("^", y).unpaddingChildren())
                 group.append(ArgumentGroup("^", z).unpaddingChildren())
             }
-            .compileArgument()
         }
     }
     

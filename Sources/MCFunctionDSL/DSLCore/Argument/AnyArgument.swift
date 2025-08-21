@@ -8,11 +8,9 @@
 import Foundation
 
 struct _AnyArgument: Argument {
-    var padding: Padding
+    let padding: Padding
     
     let _compileArgument: () -> String
-    
-    func compileArgument() -> String { return _compileArgument() }
     
     init(
         padding: Padding = (true, true),
@@ -20,5 +18,19 @@ struct _AnyArgument: Argument {
     ) {
         self.padding = padding
         self._compileArgument = compileArgument
+    }
+    
+    var argumentBody: Never { fatalError() }
+    
+    func compileArgument() -> String { return _compileArgument() }
+    
+    init(
+        _ argument: any Argument,
+        padding: Padding = (true, true)
+    ) {
+        self.init(
+            padding: padding,
+            compileArgument: { argument.compileArgument() }
+        )
     }
 }

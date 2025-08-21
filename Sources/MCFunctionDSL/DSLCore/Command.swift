@@ -9,7 +9,7 @@ import Foundation
 
 typealias Command = ArgumentGroup
 extension Command: MCComponent {
-    var body: Never { fatalError() }
+    var componentBody: Never { fatalError() }
     
     func compileLines() -> [String] {
         return [compileArgument()]
