@@ -31,7 +31,7 @@ struct Execute<Run: MCComponent>: MCComponent {
                     let runCommand = Command(line)
                     if runCommand.isExecutable {
                         let trimmedRunCommand = runCommand.modifyingString({ $0.trimmingCharacters(in: .whitespaces) })
-                        return Command(baseCommand, trimmedRunCommand).unpaddingArgument()
+                        return Command(baseCommand, "run", trimmedRunCommand).unpaddingArgument()
                     } else {
                         return runCommand
                     }

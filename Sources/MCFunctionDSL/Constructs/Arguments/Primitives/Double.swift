@@ -12,3 +12,9 @@ extension Double: Argument {
         return .init(format: "%g", self)
     }
 }
+
+extension Float: Argument {
+    func compileArgument() -> String {
+        return .init(format: "%g", self)
+    }
+}

@@ -11,15 +11,18 @@ struct Summon: MCComponent {
     let entityType: EntityType
     let position: Position?
     let name: String?
+    let spawnEvent: SpawnEvent?
     
     init(
         _ entityType: EntityType,
         at position: Position? = nil,
-        named name: String? = nil
+        named name: String? = nil,
+        spawnEvent: SpawnEvent? = nil
     ) {
         self.entityType = entityType
         self.position = position
         self.name = name
+        self.spawnEvent = spawnEvent
     }
     
     var body: some MCComponent {
@@ -27,6 +30,7 @@ struct Summon: MCComponent {
             "summon",
             entityType,
             position,
+            spawnEvent,
             name.quoted()
         )
     }

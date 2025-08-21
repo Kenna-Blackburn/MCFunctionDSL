@@ -37,13 +37,13 @@ func client() async throws {
         }
         
         Section("Effect") {
-            Effect.give(.allEntities(.named("hide")), .invisibility(1, for: 1), hideParticles: true)
-            Effect.clear(.allEntities(.named("show")))
+            Effect(give: .allEntities(.named("hide")), .invisibility(1, for: 1), hideParticles: true)
+            Effect(clear: .allEntities(.named("show")))
             
             LineBreak()
             
             for i in 1...10 as ClosedRange<UInt8> {
-                Effect.give(.allEntities(.named("up_\(i)")), .levitation(i, for: 1), hideParticles: true)
+                Effect(give: .allEntities(.tagged("up_\(i)")), .levitation(i, for: 1), hideParticles: true)
             }
         }
         
@@ -67,9 +67,9 @@ func client() async throws {
             
             // upkeep
             let spirit = TargetSelector.allEntities(.typed(.armorStand), .named("Speed Spirit"))
-            Effect.give(spirit, .invisibility(1, for: 1))
-//            Teleport(spirit, .forward(0.2), facing: .nearestPlayer(.outside(radius: 5), .within(radius: 30)))
-            Execute(At(spirit), run: { Effect.give(.allPlayers(.within(radius: 10)), .speed(3, for: 1)) })
+            Effect(give: spirit, .invisibility(1, for: 1))
+            Teleport(spirit, to: .position(.forward(0.2)), facing: .target(.nearestPlayer(.outside(radius: 5), .within(radius: 30))))
+            Execute(At(spirit), run: { Effect(give: .allPlayers(.within(radius: 10)), .speed(3, for: 1)) })
         }
         
         Section("Execute (not that bad, really)") {
@@ -107,4 +107,88 @@ func client() async throws {
     }
     
     print(build().compileContents())
+    #expect(build().compileContents() == """
+    
+    # Kill Some Stuff
+     kill
+     kill @s
+     
+     # yes thats my minecraft username too
+     kill No_Pen_3825
+     
+     # `.notNamed(_:)` coming soon
+     kill @e[name="remove_me",name=!"do_not_remove"]
+    
+    
+    # Argument Testing Hell
+     1 2 3
+     1 23 4
+     
+      +1
+       +2
+        +3
+    
+    
+    # Effect
+     effect @e[name="hide"] invisibility 1 1 true
+     effect @e[name="show"] clear
+     
+     effect @e[tag=up_1] levitation 1 1 true
+     effect @e[tag=up_2] levitation 1 2 true
+     effect @e[tag=up_3] levitation 1 3 true
+     effect @e[tag=up_4] levitation 1 4 true
+     effect @e[tag=up_5] levitation 1 5 true
+     effect @e[tag=up_6] levitation 1 6 true
+     effect @e[tag=up_7] levitation 1 7 true
+     effect @e[tag=up_8] levitation 1 8 true
+     effect @e[tag=up_9] levitation 1 9 true
+     effect @e[tag=up_10] levitation 1 10 true
+    
+    
+    # If
+     
+     # false
+      # 2
+     
+     
+     # true
+      # 1.1
+      # 1.2
+      #indent## 2
+     
+    
+    
+    # Spirit
+     execute at @e[type=minecraft:allay,name="Speed Spirit"] run summon minecraft:armor_stand "Speed Spirit"
+     kill @e[type=minecraft:allay,name="Speed Spirit"]
+     effect @e[type=minecraft:armor_stand,name="Speed Spirit"] invisibility 1 1
+     tp @e[type=minecraft:armor_stand,name="Speed Spirit"] ^ ^ ^0.2 facing @p[rm=5,r=30]
+     execute at @e[type=minecraft:armor_stand,name="Speed Spirit"] run effect @a[r=10] speed 1 3
+    
+    
+    # Execute (not that bad, really)
+     execute as @a run say 1
+     
+     # 2 & 3
+     execute as @a run say 2
+     execute as @a run say 3
+     
+    
+    
+    # Position
+     summon minecraft:armor_stand 1 2 3 "trailing arg"
+     summon minecraft:armor_stand 0.1 0.2 0.3 "trailing arg"
+     summon minecraft:armor_stand ~1 ~2 ~3 "trailing arg"
+     summon minecraft:armor_stand ~0.1 ~0.2 ~0.3 "trailing arg"
+     summon minecraft:armor_stand ^1 ^2 ^3 "trailing arg"
+     summon minecraft:armor_stand ^0.1 ^0.2 ^0.3 "trailing arg"
+     summon minecraft:armor_stand ~ ~ ~ "trailing arg"
+     summon minecraft:armor_stand ^ ^ ^1 "trailing arg"
+     summon minecraft:armor_stand ^ ^ ^0.1 "trailing arg"
+     summon minecraft:armor_stand ~1 ~ ~3 "trailing arg"
+     summon minecraft:armor_stand ^1 ^ ^3 "trailing arg"
+     summon minecraft:armor_stand ^ ^ ^ "trailing arg"
+     summon minecraft:armor_stand 1 ~ 3 "trailing arg"
+    
+    """)
 }

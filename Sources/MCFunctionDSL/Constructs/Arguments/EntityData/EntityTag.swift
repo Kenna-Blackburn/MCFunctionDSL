@@ -19,8 +19,12 @@ struct EntityTag: Argument {
     }
 }
 
-extension EntityTag: ExpressibleByStringLiteral {
+extension EntityTag:
+    ExpressibleByStringLiteral,
+    ExpressibleByStringInterpolation
+{
     init(stringLiteral value: StringLiteralType) {
         self.init(value)
     }
 }
+

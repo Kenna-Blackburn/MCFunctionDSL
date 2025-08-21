@@ -31,20 +31,20 @@ enum Effect: MCComponent {
         }
     }
     
-    static func give(
-        _ target: TargetSelector,
+    init(
+        give target: TargetSelector,
         _ effect: Self.Effect,
         hideParticles: Bool? = nil
-    ) -> Self {
-        return ._give(
+    ) {
+        self = ._give(
             target: target,
             effect: effect,
             hideParticles: hideParticles
         )
     }
     
-    static func clear(_ target: TargetSelector) -> Self {
-        return ._clear(target: target)
+    init(clear target: TargetSelector) {
+        self = ._clear(target: target)
     }
 }
 
