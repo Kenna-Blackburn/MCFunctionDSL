@@ -20,7 +20,7 @@ extension Command {
     var isExecutable: Bool {
         return self
             .compileArgument()
-            .matches(of: /\s*#+/)
+            .matches(of: /^(?:\s*#+.+|\s*)$/)
             .isEmpty
     }
 }

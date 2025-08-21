@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EntityType: Argument, ExpressibleByStringLiteral {
+struct EntityType: Argument {
     let typeID: String
     let namespace: String
     
@@ -19,12 +19,14 @@ struct EntityType: Argument, ExpressibleByStringLiteral {
         self.namespace = namespace
     }
     
-    init(stringLiteral value: StringLiteralType) {
-        self.init(value)
-    }
-    
     func compileArgument() -> String {
         return "\(namespace):\(typeID)"
+    }
+}
+
+extension EntityType: ExpressibleByStringLiteral {
+    init(stringLiteral value: StringLiteralType) {
+        self.init(value)
     }
 }
 
@@ -32,5 +34,6 @@ extension EntityType {
     static let armorStand: Self = "armor_stand"
     static let snowball: Self = "snowball"
     static let arrow: Self = "arrow"
+    static let item: Self = "item"
     static let tnt: Self = "tnt"
 }

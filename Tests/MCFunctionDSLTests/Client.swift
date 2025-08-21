@@ -62,7 +62,7 @@ func client() async throws {
         Section("Spirit") {
             // setup
             let spawnedAllay = TargetSelector.allEntities(.typed("allay"), .named("Speed Spirit")) // EntityType: ExpressibleByStringLiteral
-//            Execute(At(spawnedAllay), run: { Summon(.armorStand, named: "Speed Spirit") }) // Summon(/*...*/).execute(At(spawnAllay))
+            Execute(At(spawnedAllay), run: { Summon(.armorStand, named: "Speed Spirit") }) // Summon(/*...*/).execute(At(spawnAllay))
             Kill(spawnedAllay)
             
             // upkeep
@@ -72,12 +72,37 @@ func client() async throws {
             Execute(At(spirit), run: { Effect.give(.allPlayers(.within(radius: 10)), .speed(3, for: 1)) })
         }
         
-        Section("Execute (also testing hell)") {
+        Section("Execute (not that bad, really)") {
             Execute(As(.allPlayers), run: {
                 Command("say 1")
-                Comment("hello")
-                Command("say 2")
+                
+                Section("2 & 3") {
+                    Command("say 2")
+                    Command("say 3")
+                }
             })
+        }
+        
+        Section("Position") {
+            let positions: [Position] = [
+                .world(1, 2, 3),
+                .world(0.1, 0.2, 0.3),
+                .relative(1, 2, 3),
+                .relative(0.1, 0.2, 0.3),
+                .relativeToRotation(1, 2, 3),
+                .relativeToRotation(0.1, 0.2, 0.3),
+                .here,
+                .forward(1),
+                .forward(0.1),
+                .relative(1, nil, 3),
+                .relativeToRotation(1, nil, 3),
+                .forward(nil),
+                .init(1, nil, 3),
+            ]
+            
+            for position in positions {
+                Summon(.armorStand, at: position, named: "trailing arg")
+            }
         }
     }
     

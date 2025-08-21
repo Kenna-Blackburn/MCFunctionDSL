@@ -15,7 +15,7 @@ struct _Padding: Argument {
     func compileArgument() -> String { return " " }
 }
 
-struct _Unpadding: Argument {
+struct _Unpadding: Argument, MCComponent {
     let argument: any Argument
     
     init(_ argument: any Argument) {
@@ -23,6 +23,10 @@ struct _Unpadding: Argument {
     }
     
     let padding: Padding = (false, false)
+    
+    var body: some MCComponent {
+        Command(compileArgument())
+    }
     
     func compileArgument() -> String {
         let anyArgument = _AnyArgument(

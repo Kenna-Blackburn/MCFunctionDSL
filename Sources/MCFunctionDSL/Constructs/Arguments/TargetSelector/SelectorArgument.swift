@@ -51,7 +51,7 @@ extension TargetSelector.SelectorArgument {
     static func named(_ name: String, invert: Bool = false) -> Self {
         return .init(
             "name",
-            value: "\"\(name)\"",
+            value: name.quoted(),
             invert: invert
         )
     }
@@ -60,6 +60,14 @@ extension TargetSelector.SelectorArgument {
         return .init(
             "type",
             value: type,
+            invert: invert
+        )
+    }
+    
+    static func tagged(_ tag: EntityTag, invert: Bool = false) -> Self {
+        return .init(
+            "tag",
+            value: tag,
             invert: invert
         )
     }

@@ -27,8 +27,15 @@ struct Execute<Run: MCComponent>: MCComponent {
             
             supergroup = runCommand()
                 .compileLines()
-                .filter({ $0.matches(of: /\s*#+/).isEmpty })
-                .map({ Command(baseCommand, $0) })
+                .map { line in
+                    let runCommand = Command(line)
+                    if runCommand.isExecutable {
+                        let trimmedRunCommand = runCommand.modifyingString({ $0.trimmingCharacters(in: .whitespaces) })
+                        return Command(baseCommand, trimmedRunCommand).unpaddingArgument()
+                    } else {
+                        return runCommand
+                    }
+                }
         }
     }
 }

@@ -8,28 +8,43 @@
 import Foundation
 
 enum Effect: MCComponent {
-    case give(target: TargetSelector, effect: Self.Effect, hideParticles: Bool)
-    case clear(target: TargetSelector)
+    case _give(target: TargetSelector, effect: Self.Effect, hideParticles: Bool?)
+    case _clear(target: TargetSelector)
     
     var body: some MCComponent {
         switch self {
-        case .give(let target, let effect, let hideParticles):
-            Command("effect", target, effect.effectID, effect.duration, effect.strength, hideParticles)
-        case .clear(let target):
-            Command("effect", target, "clear")
+        case ._give(let target, let effect, let hideParticles):
+            Command(
+                "effect",
+                target,
+                effect.effectID,
+                effect.duration,
+                effect.strength,
+                hideParticles
+            )
+        case ._clear(let target):
+            Command(
+                "effect",
+                target,
+                "clear"
+            )
         }
     }
     
     static func give(
         _ target: TargetSelector,
         _ effect: Self.Effect,
-        hideParticles: Bool = false
+        hideParticles: Bool? = nil
     ) -> Self {
-        return .give(target: target, effect: effect, hideParticles: hideParticles)
+        return ._give(
+            target: target,
+            effect: effect,
+            hideParticles: hideParticles
+        )
     }
     
     static func clear(_ target: TargetSelector) -> Self {
-        return .clear(target: target)
+        return ._clear(target: target)
     }
 }
 
@@ -52,13 +67,9 @@ extension Effect {
 }
 
 extension Effect.Effect {
-    enum Duration: Argument, ExpressibleByIntegerLiteral {
+    enum Duration: Argument {
         case duration(Int)
         case infinite
-        
-        init(integerLiteral value: IntegerLiteralType) {
-            self = .duration(value)
-        }
         
         func compileArgument() -> String {
             switch self {
@@ -68,6 +79,12 @@ extension Effect.Effect {
                 return "infinite"
             }
         }
+    }
+}
+
+extension Effect.Effect.Duration: ExpressibleByIntegerLiteral {
+    init(integerLiteral value: IntegerLiteralType) {
+        self = .duration(value)
     }
 }
 

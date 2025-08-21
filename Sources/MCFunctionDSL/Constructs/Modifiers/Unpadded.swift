@@ -8,13 +8,13 @@
 import Foundation
 
 extension Argument {
-    func unpaddingArgument() -> some Argument {
+    func unpaddingArgument() -> some Argument & MCComponent {
         return _Unpadding(self)
     }
 }
 
 extension ArgumentGroup {
-    func unpaddingChildren() -> some Argument {
+    func unpaddingChildren() -> ArgumentGroup {
         let newChildren = self
             .children
             .map { child in
