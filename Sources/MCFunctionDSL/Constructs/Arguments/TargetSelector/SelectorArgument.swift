@@ -72,11 +72,11 @@ extension TargetSelector.SelectorArgument {
 }
 
 extension TargetSelector.SelectorArgument {
-    static func within(radius: UInt) -> Self {
+    static func within(radius: Double) -> Self {
         return .init("r", value: radius)
     }
     
-    static func outside(radius: UInt) -> Self {
+    static func outside(radius: Double) -> Self {
         return .init("rm", value: radius)
     }
 }
