@@ -8,11 +8,11 @@
 import Foundation
 
 struct Execute<Run: MCComponent>: MCComponent {
-    let subcommands: [any ExecuteSubcommand]
+    let subcommands: [Subcommand]
     let runCommand: () -> Run
     
     init(
-        _ subcommands: (any ExecuteSubcommand)...,
+        _ subcommands: Subcommand...,
         @MCComponentBuilder run runCommand: @escaping () -> Run
     ) {
         self.subcommands = subcommands

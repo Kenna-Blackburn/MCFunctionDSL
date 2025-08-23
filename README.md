@@ -42,9 +42,10 @@ struct SpiritsTick: MCFunction {
                 Section("Set Up") {
                     let spawnTarget = TargetSelector.allEntities(.named(name), .typed(spawnEntityType))
                     
-                    Execute(At(spawnTarget)) {
+                    Execute(.at(spawnTarget)) {
                         Summon(.armorStand, named: name)
                     }
+                    
                     
                     Kill(spawnTarget)
                 }
@@ -53,8 +54,8 @@ struct SpiritsTick: MCFunction {
                     let spirit = TargetSelector.allEntities(.named(name), .typed(.armorStand))
                     
                     Effect(
-                        give: spirit,
-                        .invisibility(1, for: 1),
+                        give: .invisibility(1, for: 1),
+                        to: spirit,
                         hideParticles: true
                     )
                     
@@ -69,8 +70,8 @@ struct SpiritsTick: MCFunction {
                         )
                     )
                     
-                    Execute(At(spirit)) {
-                        Effect(give: .nearestPlayer(.within(radius: effectRange)), effect)
+                    Execute(.at(spirit)) {
+                        Effect(give: effect, to: .nearestPlayer(.within(radius: effectRange)))
                     }
                 }
             }

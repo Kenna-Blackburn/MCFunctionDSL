@@ -32,8 +32,8 @@ enum Effect: MCComponent {
     }
     
     init(
-        give target: TargetSelector,
-        _ effect: Self.Effect,
+        give effect: Self.Effect,
+        to target: TargetSelector,
         hideParticles: Bool? = nil
     ) {
         self = ._give(
@@ -43,7 +43,7 @@ enum Effect: MCComponent {
         )
     }
     
-    init(clear target: TargetSelector) {
+    init(clearFrom target: TargetSelector) {
         self = ._clear(target: target)
     }
 }

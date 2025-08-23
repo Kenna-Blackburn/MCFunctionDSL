@@ -7,22 +7,24 @@
 
 import Foundation
 
-enum WorldPosition: Argument {
-    case world(Double)
-    case relative(Double?)
-    
-    var argumentBody: some Argument {
-        switch self {
-        case .world(let double):
-            ArgumentGroup(double)
-        case .relative(let double):
-            ArgumentGroup("~", double)
-                .unpaddingChildren()
+extension Position {
+    enum WorldPosition: Argument {
+        case world(Double)
+        case relative(Double?)
+        
+        var argumentBody: some Argument {
+            switch self {
+            case .world(let double):
+                ArgumentGroup(double)
+            case .relative(let double):
+                ArgumentGroup("~", double)
+                    .unpaddingChildren()
+            }
         }
     }
 }
 
-extension WorldPosition:
+extension Position.WorldPosition:
     ExpressibleByIntegerLiteral,
     ExpressibleByFloatLiteral,
     ExpressibleByNilLiteral

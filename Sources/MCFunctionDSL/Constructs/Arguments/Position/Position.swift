@@ -14,14 +14,14 @@ import Foundation
 // Teleport(.executor, .init(.world(1), .relative, .world(1)))
 
 enum Position: Argument {
-    case _worldPosition(x: WorldPosition, y: WorldPosition, z: WorldPosition)
-    case _relativeToRotation(x: Double?, y: Double?, z: Double?)
+    case worldPosition(WorldPosition, WorldPosition, WorldPosition)
+    case relativeToRotation(Double?, Double?, Double?)
     
     var argumentBody: some Argument {
         switch self {
-        case ._worldPosition(let x, let y, let z):
+        case .worldPosition(let x, let y, let z):
             ArgumentGroup(x, y, z)
-        case ._relativeToRotation(let x, let y, let z):
+        case .relativeToRotation(let x, let y, let z):
             ArgumentGroup { group in
                 group.append(ArgumentGroup("^", x).unpaddingChildren())
                 group.append(ArgumentGroup("^", y).unpaddingChildren())
@@ -35,7 +35,7 @@ enum Position: Argument {
         _ y: WorldPosition,
         _ z: WorldPosition,
     ) {
-        self = ._worldPosition(x: x, y: y, z: z)
+        self = .worldPosition(x, y, z)
     }
     
     static func world(
@@ -43,10 +43,10 @@ enum Position: Argument {
         _ y: Double,
         _ z: Double,
     ) -> Self {
-        return ._worldPosition(
-            x: .world(x),
-            y: .world(y),
-            z: .world(z),
+        return .worldPosition(
+            .world(x),
+            .world(y),
+            .world(z),
         )
     }
     
@@ -55,19 +55,11 @@ enum Position: Argument {
         _ y: Double?,
         _ z: Double?,
     ) -> Self {
-        return ._worldPosition(
-            x: .relative(x),
-            y: .relative(y),
-            z: .relative(z),
+        return .worldPosition(
+            .relative(x),
+            .relative(y),
+            .relative(z),
         )
-    }
-    
-    static func relativeToRotation(
-        _ x: Double?,
-        _ y: Double?,
-        _ z: Double?,
-    ) -> Self {
-        return ._relativeToRotation(x: x, y: y, z: z)
     }
 }
 

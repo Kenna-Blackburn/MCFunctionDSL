@@ -37,13 +37,13 @@ func client() async throws {
         }
         
         Section("Effect") {
-            Effect(give: .allEntities(.named("hide")), .invisibility(1, for: 1), hideParticles: true)
-            Effect(clear: .allEntities(.named("show")))
+            Effect(give: .invisibility(1, for: 1), to: .allEntities(.named("hide")), hideParticles: true)
+            Effect(clearFrom: .allEntities(.named("show")))
             
             LineBreak()
             
             for i in 1...10 as ClosedRange<UInt8> {
-                Effect(give: .allEntities(.tagged("up_\(i)")), .levitation(i, for: 1), hideParticles: true)
+                Effect(give: .levitation(i, for: 1), to: .allEntities(.tagged("up_\(i)")), hideParticles: true)
             }
         }
         
@@ -62,25 +62,25 @@ func client() async throws {
         Section("Spirit") {
             // setup
             let spawnedAllay = TargetSelector.allEntities(.typed("allay"), .named("Speed Spirit")) // EntityType: ExpressibleByStringLiteral
-            Execute(At(spawnedAllay), run: { Summon(.armorStand, named: "Speed Spirit") }) // Summon(/*...*/).execute(At(spawnAllay))
+            Execute(.at(spawnedAllay), run: { Summon(.armorStand, named: "Speed Spirit") }) // Summon(/*...*/).execute(At(spawnAllay))
             Kill(spawnedAllay)
             
             // upkeep
             let spirit = TargetSelector.allEntities(.typed(.armorStand), .named("Speed Spirit"))
-            Effect(give: spirit, .invisibility(1, for: 1))
+            Effect(give: .invisibility(1, for: 1), to: spirit)
             Teleport(spirit, to: .position(.forward(0.2)), facing: .target(.nearestPlayer(.outside(radius: 5), .within(radius: 30))))
-            Execute(At(spirit), run: { Effect(give: .allPlayers(.within(radius: 10)), .speed(3, for: 1)) })
+            Execute(.at(spirit), run: { Effect(give: .speed(3, for: 1), to: .allPlayers(.within(radius: 10))) })
         }
         
         Section("Execute (not that bad, really)") {
-            Execute(As(.allPlayers), run: {
+            Execute(.as(.allPlayers)) {
                 Command("say 1")
                 
                 Section("2 & 3") {
                     Command("say 2")
                     Command("say 3")
                 }
-            })
+            }
         }
         
         Section("Position") {
