@@ -15,7 +15,7 @@ enum Facing: Argument {
     var argumentBody: some Argument {
         switch self {
         case .rotation(let rotation):
-            ArgumentGroup(rotation)
+            rotation.erase()
         case .position(let position):
             ArgumentGroup("facing", position)
         case .target(let target):

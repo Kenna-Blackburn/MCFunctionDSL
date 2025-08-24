@@ -72,7 +72,7 @@ extension TargetSelector.SelectorArgument {
 }
 
 extension TargetSelector.SelectorArgument {
-    static func within(radius: Double) -> Self {
+    static func inside(radius: Double) -> Self {
         return .init("r", value: radius)
     }
     

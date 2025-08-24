@@ -74,9 +74,9 @@ extension Effect.Effect {
         var argumentBody: some Argument {
             switch self {
             case .duration(let duration):
-                ArgumentGroup(duration)
+                duration.erase()
             case .infinite:
-                ArgumentGroup("infinite")
+                "infinite".erase()
             }
         }
     }

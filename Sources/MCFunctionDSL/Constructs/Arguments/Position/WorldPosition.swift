@@ -8,14 +8,14 @@
 import Foundation
 
 extension Position {
-    enum WorldPosition: Argument {
+    enum WorldPosition: Argument, Equatable {
         case world(Double)
         case relative(Double?)
         
         var argumentBody: some Argument {
             switch self {
             case .world(let double):
-                ArgumentGroup(double)
+                double.erase()
             case .relative(let double):
                 ArgumentGroup("~", double)
                     .unpaddingChildren()

@@ -58,9 +58,9 @@ extension Teleport {
         var argumentBody: some Argument {
             switch self {
             case .position(let position):
-                ArgumentGroup(position)
+                position.erase()
             case .target(let target):
-                ArgumentGroup(target)
+                target.erase()
             }
         }
     }

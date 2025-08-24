@@ -68,13 +68,13 @@ func client2() async throws {
                             facing: .target(
                                 .nearestPlayer(
                                     .outside(radius: movementRange.lowerBound),
-                                    .within(radius: movementRange.upperBound)
+                                    .inside(radius: movementRange.upperBound)
                                 )
                             )
                         )
                         
                         Execute(.at(spirit)) {
-                            Effect(give: effect, to: .nearestPlayer(.within(radius: effectRange)))
+                            Effect(give: effect, to: .nearestPlayer(.inside(radius: effectRange)))
                         }
                     }
                 }

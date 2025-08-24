@@ -22,7 +22,7 @@ struct TargetSelector: Argument {
     
     var argumentBody: some Argument {
         if arguments.isEmpty {
-            ArgumentGroup(variable)
+            variable.erase()
         } else {
             ArgumentGroup(
                 variable,

@@ -13,7 +13,7 @@ import Foundation
 
 // Teleport(.executor, .init(.world(1), .relative, .world(1)))
 
-enum Position: Argument {
+enum Position: Argument, Equatable {
     case worldPosition(WorldPosition, WorldPosition, WorldPosition)
     case relativeToRotation(Double?, Double?, Double?)
     
